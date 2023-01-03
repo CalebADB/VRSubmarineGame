@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubmarinePowerTrain : MonoBehaviour
+public class SubmarinePowertrain : MonoBehaviour
 {
     private SubmarineEngine engineL;
     private SubmarineEngine engineR;
@@ -24,7 +24,7 @@ public class SubmarinePowerTrain : MonoBehaviour
 
     void Update()
     {
-        // Calculate effects on powerTrain
+        // Calculate effects on powertrain
         calculateForce();
     }
 

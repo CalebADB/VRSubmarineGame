@@ -96,14 +96,11 @@ public class SubmarineThrottle : MonoBehaviour
         else
         {
             ApplyHandleReturnForce();
+            ApplyHandleOzForce();
 
             handleVisualTransform.position += handleVelocity * Time.deltaTime;
             handleInteractableTransform.position = handleVisualTransform.position;
-
-            // Oz is for testing purposes only
-            ApplyHandleOzForce();
         }
-
 
         engine.control(handleDisplacement.normalized, handleDistance / handleRadiusMax);
     }

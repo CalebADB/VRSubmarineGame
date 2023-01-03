@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6820781078457308905}
   - component: {fileID: 8321366254560818016}
   m_Layer: 0
-  m_Name: PowerTrain_Debug01
+  m_Name: Powertrain_Debug01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

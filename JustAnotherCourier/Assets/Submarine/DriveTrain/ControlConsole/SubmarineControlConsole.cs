@@ -13,6 +13,8 @@ public class SubmarineControlConsole : MonoBehaviour
     [SerializeField]
     public bool shouldOz = true;
     [SerializeField]
+    public bool shouldOzExclusively = true;
+    [SerializeField]
     public bool shouldOzFwd = false;
     [SerializeField]
     public bool shouldOzBwd = false;
@@ -68,7 +70,7 @@ public class SubmarineControlConsole : MonoBehaviour
             throttleL.shouldApplyOzForceToHandleP10_000_000 = true;
             throttleR.shouldApplyOzForceToHandleP10_000_000 = true;
         }
-        else
+        else if (shouldOzExclusively)
         {
             throttleL.shouldApplyOzForceToHandleP10_000_000 = false;
             throttleR.shouldApplyOzForceToHandleP10_000_000 = false;
@@ -78,7 +80,7 @@ public class SubmarineControlConsole : MonoBehaviour
             throttleL.shouldApplyOzForceToHandleN10_000_000 = true;
             throttleR.shouldApplyOzForceToHandleN10_000_000 = true;
         }
-        else
+        else if (shouldOzExclusively)
         {
             throttleL.shouldApplyOzForceToHandleN10_000_000 = false;
             throttleR.shouldApplyOzForceToHandleN10_000_000 = false;
@@ -88,7 +90,7 @@ public class SubmarineControlConsole : MonoBehaviour
             throttleL.shouldApplyOzForceToHandle000_P10_000 = true;
             throttleR.shouldApplyOzForceToHandle000_P10_000 = true;
         }
-        else
+        else if (shouldOzExclusively)
         {
             throttleL.shouldApplyOzForceToHandle000_P10_000 = false;
             throttleR.shouldApplyOzForceToHandle000_P10_000 = false;
@@ -98,7 +100,7 @@ public class SubmarineControlConsole : MonoBehaviour
             throttleL.shouldApplyOzForceToHandle000_N10_000 = true;
             throttleR.shouldApplyOzForceToHandle000_N10_000 = true;
         }
-        else
+        else if (shouldOzExclusively)
         {
             throttleL.shouldApplyOzForceToHandle000_N10_000 = false;
             throttleR.shouldApplyOzForceToHandle000_N10_000 = false;
@@ -108,7 +110,7 @@ public class SubmarineControlConsole : MonoBehaviour
             throttleL.shouldApplyOzForceToHandle000_000_N10 = true;
             throttleR.shouldApplyOzForceToHandle000_000_N10 = true;
         }
-        else
+        else if (shouldOzExclusively)
         {
             throttleL.shouldApplyOzForceToHandle000_000_N10 = false;
             throttleR.shouldApplyOzForceToHandle000_000_N10 = false;
@@ -118,7 +120,7 @@ public class SubmarineControlConsole : MonoBehaviour
             throttleL.shouldApplyOzForceToHandle000_000_P10 = true;
             throttleR.shouldApplyOzForceToHandle000_000_P10 = true;
         }
-        else
+        else if (shouldOzExclusively)
         {
             throttleL.shouldApplyOzForceToHandle000_000_P10 = false;
             throttleR.shouldApplyOzForceToHandle000_000_P10 = false;

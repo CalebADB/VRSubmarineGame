@@ -10,7 +10,7 @@ public class Submarine : MonoBehaviour
 
     // Submarine game objects
     private SubmarineFrame frame;
-    private SubmarineDriveTrain driveTrain;
+    private SubmarineDrivetrain drivetrain;
 
     // physics
     float gravitationalCoefficient = 1000.0f;
@@ -46,10 +46,10 @@ public class Submarine : MonoBehaviour
             return;
         }
 
-        driveTrain = GetComponentInChildren<SubmarineDriveTrain>();
-        if (driveTrain == null)
+        drivetrain = GetComponentInChildren<SubmarineDrivetrain>();
+        if (drivetrain == null)
         {
-            Debug.Log("Submarine missing its driveTrain. Destroying submarine");
+            Debug.Log("Submarine missing its drivetrain. Destroying submarine");
             Destroy(this);
             return;
         }
@@ -89,7 +89,7 @@ public class Submarine : MonoBehaviour
     private void calculateVelocityLinear()
     {
         // Apply force from submarine components
-        velocityLinear += driveTrain.getForceLinear() * Time.deltaTime;
+        velocityLinear += drivetrain.getForceLinear() * Time.deltaTime;
         velocityLinear += frame.getForceLinear() * Time.deltaTime;
 
         // Bind speed to max value in editor
@@ -99,7 +99,7 @@ public class Submarine : MonoBehaviour
     private void calculateVelocityAngular()
     {
         // Apply force from submarine components
-        velocityAngular += (driveTrain.getTorque() / momentOfInertia) * Time.deltaTime;
+        velocityAngular += (drivetrain.getTorque() / momentOfInertia) * Time.deltaTime;
         velocityAngular += (frame.getTorque() / momentOfInertia) * Time.deltaTime;
 
         // Bind speed to max value in editor
