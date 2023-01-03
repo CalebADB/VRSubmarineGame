@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class SubmarineControlConsole : MonoBehaviour
 {
-    SubmarineThrottle throttleL;
-    SubmarineThrottle throttleR;
+    // Throttles
+    public SubmarineThrottle throttleL;
+    public SubmarineThrottle throttleR;
 
+    // Oz (simulated player interaction)
     [SerializeField]
     public bool shouldOz = true;
     [SerializeField]
@@ -25,13 +27,12 @@ public class SubmarineControlConsole : MonoBehaviour
 
     void Start()
     {
-        GameObject[] gameObjects = FindObjectsOfType<GameObject>();
-        foreach (GameObject gameObject in gameObjects)
+        SubmarineThrottle[] throttles = GetComponentsInChildren<SubmarineThrottle>(); ;
+        foreach (SubmarineThrottle throttle in throttles)
         {
-            if ((gameObject.name == "ThrottleL") && (gameObject.GetComponent<SubmarineThrottle>() != null)) throttleL = gameObject.GetComponent<SubmarineThrottle>();
-            if ((gameObject.name == "ThrottleR") && (gameObject.GetComponent<SubmarineThrottle>() != null)) throttleR = gameObject.GetComponent<SubmarineThrottle>();
+            if (throttle.name == "ThrottleL") throttleL = throttle;
+            if (throttle.name == "ThrottleR") throttleR = throttle;
         }
-
     }
 
     void Update()
@@ -39,55 +40,88 @@ public class SubmarineControlConsole : MonoBehaviour
         manageOzEffect();
     }
 
+    // Testing function a la "wizard of Oz." Focussing on linear movement
     void manageOzEffect()
     {
+        // Turn off all oz effects for all controls in the control console if indicated
         if (!shouldOz)
         {
-            throttleL.shouldApplyOzForceToHandle000_000_N10 = false;
-            throttleR.shouldApplyOzForceToHandle000_000_N10 = false;
-            throttleL.shouldApplyOzForceToHandle000_000_P10 = false;
-            throttleR.shouldApplyOzForceToHandle000_000_P10 = false;
-            throttleL.shouldApplyOzForceToHandle000_P10_000 = false;
-            throttleR.shouldApplyOzForceToHandle000_P10_000 = false;
-            throttleL.shouldApplyOzForceToHandle000_N10_000 = false;
-            throttleR.shouldApplyOzForceToHandle000_N10_000 = false;
             throttleL.shouldApplyOzForceToHandleP10_000_000 = false;
-            throttleR.shouldApplyOzForceToHandleP10_000_000 = false;
             throttleL.shouldApplyOzForceToHandleN10_000_000 = false;
+            throttleL.shouldApplyOzForceToHandle000_P10_000 = false;
+            throttleL.shouldApplyOzForceToHandle000_N10_000 = false;
+            throttleL.shouldApplyOzForceToHandle000_000_N10 = false;
+            throttleL.shouldApplyOzForceToHandle000_000_P10 = false;
+            
+            throttleR.shouldApplyOzForceToHandleP10_000_000 = false;
             throttleR.shouldApplyOzForceToHandleN10_000_000 = false;
+            throttleR.shouldApplyOzForceToHandle000_P10_000 = false;
+            throttleR.shouldApplyOzForceToHandle000_N10_000 = false;
+            throttleR.shouldApplyOzForceToHandle000_000_N10 = false;
+            throttleR.shouldApplyOzForceToHandle000_000_P10 = false;
             return;
         }
 
-        if (shouldOzFwd)
-        {
-            throttleL.shouldApplyOzForceToHandle000_000_N10 = true;
-            throttleR.shouldApplyOzForceToHandle000_000_N10 = true;
-        }
-        if (shouldOzBwd)
-        {
-            throttleL.shouldApplyOzForceToHandle000_000_P10 = true;
-            throttleR.shouldApplyOzForceToHandle000_000_P10 = true;
-        }
-        if (shouldOzUp)
-        {
-            throttleL.shouldApplyOzForceToHandle000_P10_000 = true;
-            throttleR.shouldApplyOzForceToHandle000_P10_000 = true;
-        }
-        if (shouldOzDown)
-        {
-            throttleL.shouldApplyOzForceToHandle000_N10_000 = true;
-            throttleR.shouldApplyOzForceToHandle000_N10_000 = true;
-        }
+        // Set pairs of effects, resulting in linear forces being applied on submarine
         if (shouldOzLeft)
         {
             throttleL.shouldApplyOzForceToHandleP10_000_000 = true;
             throttleR.shouldApplyOzForceToHandleP10_000_000 = true;
+        }
+        else
+        {
+            throttleL.shouldApplyOzForceToHandleP10_000_000 = false;
+            throttleR.shouldApplyOzForceToHandleP10_000_000 = false;
         }
         if (shouldOzRight)
         {
             throttleL.shouldApplyOzForceToHandleN10_000_000 = true;
             throttleR.shouldApplyOzForceToHandleN10_000_000 = true;
         }
-
+        else
+        {
+            throttleL.shouldApplyOzForceToHandleN10_000_000 = false;
+            throttleR.shouldApplyOzForceToHandleN10_000_000 = false;
+        }
+        if (shouldOzUp)
+        {
+            throttleL.shouldApplyOzForceToHandle000_P10_000 = true;
+            throttleR.shouldApplyOzForceToHandle000_P10_000 = true;
+        }
+        else
+        {
+            throttleL.shouldApplyOzForceToHandle000_P10_000 = false;
+            throttleR.shouldApplyOzForceToHandle000_P10_000 = false;
+        }
+        if (shouldOzDown)
+        {
+            throttleL.shouldApplyOzForceToHandle000_N10_000 = true;
+            throttleR.shouldApplyOzForceToHandle000_N10_000 = true;
+        }
+        else
+        {
+            throttleL.shouldApplyOzForceToHandle000_N10_000 = false;
+            throttleR.shouldApplyOzForceToHandle000_N10_000 = false;
+        }
+        if (shouldOzFwd)
+        {
+            throttleL.shouldApplyOzForceToHandle000_000_N10 = true;
+            throttleR.shouldApplyOzForceToHandle000_000_N10 = true;
+        }
+        else
+        {
+            throttleL.shouldApplyOzForceToHandle000_000_N10 = false;
+            throttleR.shouldApplyOzForceToHandle000_000_N10 = false;
+        }
+        if (shouldOzBwd)
+        {
+            throttleL.shouldApplyOzForceToHandle000_000_P10 = true;
+            throttleR.shouldApplyOzForceToHandle000_000_P10 = true;
+        }
+        else
+        {
+            throttleL.shouldApplyOzForceToHandle000_000_P10 = false;
+            throttleR.shouldApplyOzForceToHandle000_000_P10 = false;
+        }
     }
 }

@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class SubmarineDriveTrain : MonoBehaviour
 {
+    // Drivetrain game objects
     private SubmarineControlConsole controlConsole;
+    private SubmarinePowerTrain powerTrain;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +19,25 @@ public class SubmarineDriveTrain : MonoBehaviour
             return;
         }
 
+        powerTrain = GetComponentInChildren<SubmarinePowerTrain>();
+        if (powerTrain == null)
+        {
+            Debug.Log("Submarine missing its powerTrain. Destroying this drive train");
+            Destroy(this);
+            return;
+        }
+
+        // Imagine wiring a throttle to an engine fuel-injector (speed) and some servos (direction)
+        powerTrain.connectControls(controlConsole.throttleL, controlConsole.throttleR);
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector3 getForceLinear()
     {
-        
+        return powerTrain.getForceLinear();
     }
+    public Vector3 getTorque()
+    {
+        return powerTrain.getTorque();
+    }
+
 }
