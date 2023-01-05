@@ -20,6 +20,9 @@ public class SubmarineThrottle : MonoBehaviour
     // Engine
     private SubmarineEngine engine;
 
+    // Stabilizer
+    private SubmarineStabilizer stabilizer;
+
     // Physics
     private Vector3 handleVelocity = Vector3.zero;
 
@@ -66,10 +69,10 @@ public class SubmarineThrottle : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         handleOriginPosition = transform.position;
-        
+
         Transform[] childTransforms = GetComponentsInChildren<Transform>();
         foreach (Transform childTransform in childTransforms)
         {
@@ -103,6 +106,7 @@ public class SubmarineThrottle : MonoBehaviour
         }
 
         engine.control(handleDisplacement.normalized, handleDistance / handleRadiusMax);
+        stabilizer.control(name, handleInteractable.isHandAttached);
     }
 
     private void FixedUpdate()
@@ -117,6 +121,12 @@ public class SubmarineThrottle : MonoBehaviour
     public void connectEngine(SubmarineEngine inEngine)
     {
         engine = inEngine;
+        Debug.Log("InEngine: " + inEngine.name);
+
+    }
+    public void connectStablizer(SubmarineStabilizer inStabilizer)
+    {
+        stabilizer = inStabilizer;
     }
 
     private void CalculateHandleDisplacement()

@@ -9,27 +9,28 @@ public class SubmarineDrivetrain : MonoBehaviour
     private SubmarinePowertrain powertrain;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        controlConsole = GetComponentInChildren<SubmarineControlConsole> ();
+        controlConsole = GetComponentInChildren<SubmarineControlConsole>();
         if (controlConsole == null)
         {
-            Debug.Log("Submarine missing its controlConsole. Destroying this drive train");
-            Destroy(this);
+            Debug.Log("Drivetrain missing its controlConsole");
             return;
         }
 
         powertrain = GetComponentInChildren<SubmarinePowertrain>();
         if (powertrain == null)
         {
-            Debug.Log("Submarine missing its powertrain. Destroying this drive train");
-            Destroy(this);
+            Debug.Log("Drivetrain missing its powertrain");
             return;
         }
-
+    }
+    void Start()
+    {         
         // Imagine wiring a throttle to an engine fuel-injector (speed) and some servos (direction)
         powertrain.connectControls(controlConsole.throttleL, controlConsole.throttleR);
     }
+
 
     public Vector3 getForceLinear()
     {

@@ -16,13 +16,12 @@ public class SubmarineFrame : MonoBehaviour
     private Vector3 torque;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         parentSubmarine = GameObject.FindGameObjectWithTag("Submarine").GetComponent<Submarine>();
         if (parentSubmarine == null)
         {
-            Debug.Log("Frame missing its submarine. Destroying frame");
-            Destroy(this);
+            Debug.Log("Frame missing its submarine");
             return;
         }
     }

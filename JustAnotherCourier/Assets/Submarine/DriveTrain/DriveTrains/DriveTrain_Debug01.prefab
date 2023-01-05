@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2443055625718058115}
   - component: {fileID: 3566721774471737619}
   m_Layer: 0
-  m_Name: Drivetrain_Debug01
+  m_Name: DriveTrain_Debug01
   m_TagString: DriveTrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4887304437421278916, guid: b93a9566c0284f243a99bf2f230b61eb, type: 3}
       propertyPath: m_Name
-      value: Powertrain_Debug01
+      value: Powertrain
       objectReference: {fileID: 0}
     - target: {fileID: 6820781078457308905, guid: b93a9566c0284f243a99bf2f230b61eb, type: 3}
       propertyPath: m_RootOrder
