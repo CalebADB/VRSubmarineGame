@@ -1,56 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Submarine : MonoBehaviour
 {
     // World
-    private World world;
+    public World world;
 
     // Submarine game objects
     private SubmarineFrame frame;
     private SubmarineDrivetrain drivetrain;
 
     // physics
-    float gravitationalCoefficient = 1000.0f;
+    public float gravitationalCoefficient = 1000.0f;
     [SerializeField]
-    Vector3 centerOfGravity = Vector3.down;
-    float momentOfInertia = 0.1f;
+    public Vector3 centerOfGravity = Vector3.down;
+    private float momentOfInertia = 0.1f;
 
     [SerializeField]
-    Vector3 velocityLinear = Vector3.zero;
+    private Vector3 velocityLinear = Vector3.zero;
     [SerializeField]
-    Vector3 velocityAngular = Vector3.zero;
+    private Vector3 velocityAngular = Vector3.zero;
     [SerializeField, Range(0.1f, 500)]
-    float speedTerminalLinear = 1;
+    private float speedTerminalLinear = 1;
     [SerializeField, Range(0.1f, 500)]
-    float speedAngularMax = 1;
+    private float speedAngularMax = 1;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         world = GameObject.FindGameObjectWithTag("World").GetComponent<World>();
         if (world == null)
         {
-            Debug.Log("Submarine missing its world. Destroying submarine");
-            Destroy(this);
+            Debug.Log("Submarine missing its world");
             return;
         }
 
         frame = GetComponentInChildren<SubmarineFrame>();
         if (frame == null)
         {
-            Debug.Log("Submarine missing its frame. Destroying submarine");
-            Destroy(this);
+            Debug.Log("Submarine missing its frame");
             return;
         }
 
         drivetrain = GetComponentInChildren<SubmarineDrivetrain>();
         if (drivetrain == null)
         {
-            Debug.Log("Submarine missing its drivetrain. Destroying submarine");
-            Destroy(this);
+            Debug.Log("Submarine missing its drivetrain");
             return;
         }
     }

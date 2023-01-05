@@ -17,14 +17,13 @@ public class SubmarineEngine : MonoBehaviour
     public Vector3 relativeLocation = Vector3.zero; //Relative to moment of inertia
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Transform[] transforms = GetComponentsInChildren<Transform>();
         foreach (Transform t in transforms) if (t.gameObject.name == "Body") bodyTransform = t;
         if (bodyTransform.name != "Body")
         {
-            Debug.Log("Engine missing its body. Destroying this engine");
-            Destroy(this);
+            Debug.Log("Engine missing its body");
             return;
         }
     }

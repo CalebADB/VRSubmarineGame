@@ -7,12 +7,14 @@ public class SubmarinePowertrain : MonoBehaviour
     private SubmarineEngine engineL;
     private SubmarineEngine engineR;
 
+    private SubmarineStabilizer stabilizer;
+
     private Vector3 forceLinear = Vector3.zero;
     private Vector3 torque = Vector3.zero;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         SubmarineEngine[] engines = GetComponentsInChildren<SubmarineEngine>(); ;
         foreach (SubmarineEngine engine in engines)
@@ -20,6 +22,8 @@ public class SubmarinePowertrain : MonoBehaviour
             if (engine.name == "EngineL") engineL = engine;
             if (engine.name == "EngineR") engineR = engine;
         }
+
+        stabilizer = GetComponentInChildren<SubmarineStabilizer>();
     }
 
     void Update()
@@ -39,8 +43,15 @@ public class SubmarinePowertrain : MonoBehaviour
 
     public void connectControls(SubmarineThrottle throttleL, SubmarineThrottle throttleR)
     {
+        if (throttleL != null) Debug.Log(throttleL.name);
+        else Debug.Log("naw throttle: ");
+        if (engineL != null) Debug.Log(engineL.name);
+        else Debug.Log("naw engineL : ");
         throttleL.connectEngine(engineL);
+        throttleL.connectStablizer(stabilizer);
+
         throttleR.connectEngine(engineR);
+        throttleR.connectStablizer(stabilizer);
     }
 
     private void calculateForce()
@@ -49,6 +60,7 @@ public class SubmarinePowertrain : MonoBehaviour
         forceLinear = Vector3.zero;
 
         addEngineForce();
+        addStablizerForce();
     }
 
     private void addEngineForce()
@@ -68,5 +80,9 @@ public class SubmarinePowertrain : MonoBehaviour
 
         // Force that will move the object in a rotation
         if (Mathf.Abs(totalTorqueMag) > 0.001f) torque += engineTorque * ((totalTorqueMag - absorbedTorqueMag) / totalTorqueMag);
+    }
+    private void addStablizerForce()
+    {
+        torque += stabilizer.getTorque();
     }
 }

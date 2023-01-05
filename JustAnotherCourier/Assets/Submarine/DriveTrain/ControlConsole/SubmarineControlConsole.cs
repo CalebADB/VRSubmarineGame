@@ -6,7 +6,9 @@ using UnityEngine;
 public class SubmarineControlConsole : MonoBehaviour
 {
     // Throttles
+    [SerializeField]
     public SubmarineThrottle throttleL;
+    [SerializeField]
     public SubmarineThrottle throttleR;
 
     // Oz (simulated player interaction)
@@ -27,7 +29,7 @@ public class SubmarineControlConsole : MonoBehaviour
     [SerializeField]
     public bool shouldOzRight = false;
 
-    void Start()
+    void Awake()
     {
         SubmarineThrottle[] throttles = GetComponentsInChildren<SubmarineThrottle>(); ;
         foreach (SubmarineThrottle throttle in throttles)
