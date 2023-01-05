@@ -9,10 +9,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 682862138459888481, guid: bd11a0651ab3a964cbeec44cd194fa5f, type: 3}
-      propertyPath: speedTerminalLinear
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 682862138459888481, guid: bd11a0651ab3a964cbeec44cd194fa5f, type: 3}
       propertyPath: speedTerminalAngular
       value: 100
       objectReference: {fileID: 0}

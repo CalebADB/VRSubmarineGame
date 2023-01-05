@@ -16,7 +16,7 @@ public class Submarine : MonoBehaviour
     float gravitationalCoefficient = 1000.0f;
     [SerializeField]
     Vector3 centerOfGravity = Vector3.down;
-    float momentOfInertia = 0.01f;
+    float momentOfInertia = 0.1f;
 
     [SerializeField]
     Vector3 velocityLinear = Vector3.zero;
@@ -81,8 +81,8 @@ public class Submarine : MonoBehaviour
     private void calculateGravitationalForce()
     {
         // Find angle between world gravitational pull and ship ballast
-        Vector3 centerOfGravityRelativeToWorld = Quaternion.Inverse(world.transform.rotation) * centerOfGravity;
-        Vector3 gravitationalTorque = Vector3.Cross(centerOfGravity, centerOfGravityRelativeToWorld);
+        Vector3 centerOfGravityRelativeToWorld = world.transform.rotation * centerOfGravity;
+        Vector3 gravitationalTorque = -Vector3.Cross(centerOfGravity, centerOfGravityRelativeToWorld);
         velocityAngular += gravitationalTorque * gravitationalCoefficient * Time.deltaTime;
     }
 

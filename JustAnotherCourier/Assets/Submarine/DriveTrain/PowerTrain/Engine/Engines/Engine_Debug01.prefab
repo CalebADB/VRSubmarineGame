@@ -174,9 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0ab18a76ecfcd4faa11986a246d0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustMagnitudeMax: 50
+  thrustMagnitudeMax: 20
   relativeLocation: {x: 0, y: 0, z: 0}
-  bodyTransform: {fileID: 0}
 --- !u!1 &4782777120607971634
 GameObject:
   m_ObjectHideFlags: 0

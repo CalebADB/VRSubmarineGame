@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b42478f8746b849b74310231df6619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  centerOfGravity: {x: 0, y: -1, z: 0}
+  velocityLinear: {x: 0, y: 0, z: 0}
+  velocityAngular: {x: 0, y: 0, z: 0}
+  speedTerminalLinear: 100
+  speedAngularMax: 100

@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1599491181949007911, guid: f971fc7c98f7d7040b18440d28f9430f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3407335715653443698, guid: f971fc7c98f7d7040b18440d28f9430f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -209,6 +213,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6517982553055187882, guid: f971fc7c98f7d7040b18440d28f9430f, type: 3}
       propertyPath: m_Shadows.m_NormalBias
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8014682978626715829, guid: f971fc7c98f7d7040b18440d28f9430f, type: 3}
+      propertyPath: shouldOzExclusively
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8627836356413936097, guid: f971fc7c98f7d7040b18440d28f9430f, type: 3}
