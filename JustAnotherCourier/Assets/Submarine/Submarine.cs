@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Submarine : MonoBehaviour
 {
+    
     // World
     public World world;
 
@@ -115,5 +116,16 @@ public class Submarine : MonoBehaviour
         world.transform.RotateAround(Vector3.zero, Vector3.right, displacementAngular.x);
         world.transform.RotateAround(Vector3.zero, Vector3.up, displacementAngular.y);
         world.transform.RotateAround(Vector3.zero, Vector3.forward, displacementAngular.z);
+
+        // Displace position
+        //world.rigidbody.velocity = -velocityLinear;
+        //world.rigidbody.angularVelocity = -velocityAngular;
+
+        // Displace rotation
+        //Vector3 displacementAngular = velocityAngular * Time.deltaTime;
+        //world.transform.RotateAround(Vector3.zero, Vector3.right, displacementAngular.x);
+        //world.transform.RotateAround(Vector3.zero, Vector3.up, displacementAngular.y);
+        //world.transform.RotateAround(Vector3.zero, Vector3.forward, displacementAngular.z);
+
     }
 }

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 309042801013447369}
   m_LocalRotation: {x: 0, y: 0, z: -0.3420201, w: 0.9396927}
   m_LocalPosition: {x: 14.25, y: -5.56, z: -4.42}
-  m_LocalScale: {x: 1.1172633, y: 1.2383, z: 3.5388}
+  m_LocalScale: {x: 1.1172633, y: 0.1, z: 3.5388}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5963439171200560034}
@@ -95,7 +95,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &6476239158928122636
@@ -126,7 +126,7 @@ Transform:
   m_GameObject: {fileID: 6476239158928122636}
   m_LocalRotation: {x: -0.11520786, y: -0.007856108, z: -0.5635859, w: -0.8179465}
   m_LocalPosition: {x: 13.72, y: -5.64, z: 1.3}
-  m_LocalScale: {x: 5.0178, y: 1.2383, z: 3.5388}
+  m_LocalScale: {x: 5.0178, y: 0.1, z: 3.5388}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5963439171200560034}
@@ -193,7 +193,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1250268304563863173
@@ -228,13 +228,17 @@ PrefabInstance:
       propertyPath: m_Shadows.m_Strength
       value: 0.339
       objectReference: {fileID: 0}
+    - target: {fileID: 3635997069001655813, guid: c294431188a8bf54fb5ce169b04a61fa, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4653680411813734531, guid: c294431188a8bf54fb5ce169b04a61fa, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4653680411813734531, guid: c294431188a8bf54fb5ce169b04a61fa, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4653680411813734531, guid: c294431188a8bf54fb5ce169b04a61fa, type: 3}
       propertyPath: m_LocalScale.z
