@@ -121,8 +121,6 @@ public class SubmarineThrottle : MonoBehaviour
     public void connectEngine(SubmarineEngine inEngine)
     {
         engine = inEngine;
-        Debug.Log("InEngine: " + inEngine.name);
-
     }
     public void connectStablizer(SubmarineStabilizer inStabilizer)
     {
