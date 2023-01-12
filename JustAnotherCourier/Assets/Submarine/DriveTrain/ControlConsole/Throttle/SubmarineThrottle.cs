@@ -128,10 +128,6 @@ public class SubmarineThrottle : MonoBehaviour
     {
         stabilizer = inStabilizer;
     }
-    public void connectStablizer(SubmarineStabilizer inStabilizer)
-    {
-        stabilizer = inStabilizer;
-    }
 
     private void CalculateHandleDisplacement()
     {
