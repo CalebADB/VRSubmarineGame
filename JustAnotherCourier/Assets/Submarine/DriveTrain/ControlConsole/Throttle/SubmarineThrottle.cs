@@ -182,8 +182,11 @@ public class SubmarineThrottle : MonoBehaviour
     }
     private void ApplyHandleVibration()
     {
-        // Apply an basenote of haptics to inform player they are holding the throttle
-        handleInteractable.handAttached.hapticAction.Execute(0.0f, Time.deltaTime, 20.0f, 0.05f, handleInteractable.handAttached.handType);
+        // Apply a basenote of haptics to inform player they are holding the throttle
+        handleInteractable.handAttached.hapticAction.Execute(0.0f, Time.deltaTime, 40.0f, 0.05f, handleInteractable.handAttached.handType);
+
+        // Apply a linear amount of haptics to inform player of speed
+        handleInteractable.handAttached.hapticAction.Execute(0.0f, Time.deltaTime, 30.0f, (handleDistance / handleRadiusMax) * 0.05f, handleInteractable.handAttached.handType);
 
         // Apply further haptics to inform user that they are struggling to push this throttle to its brink
         if (handleDistance > handleTensionRadiusMin)

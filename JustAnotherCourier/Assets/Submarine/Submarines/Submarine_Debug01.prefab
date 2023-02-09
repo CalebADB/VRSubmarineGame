@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Frame
       objectReference: {fileID: 0}
+    - target: {fileID: 5355843354185441412, guid: 946cc9fbbd7e97a4ca0e3d32b852bb2a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8684740399670582213, guid: 946cc9fbbd7e97a4ca0e3d32b852bb2a, type: 3}
       propertyPath: m_Shadows.m_Type
       value: 2
