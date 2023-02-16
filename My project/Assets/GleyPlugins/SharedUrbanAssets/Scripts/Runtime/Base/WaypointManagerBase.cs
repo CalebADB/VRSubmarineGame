@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace GleyUrbanAssets
@@ -36,6 +37,16 @@ namespace GleyUrbanAssets
         /// <param name="waypointIndex"></param>
         internal virtual void SetNextWaypoint(int agentIndex, int waypointIndex)
         {
+            //string output = "";
+            //output += "neighbors: ";
+            //foreach (int nb in allWaypoints[waypointIndex].neighbors) { output += nb.ToString() + ", "; }
+            //output += "Name: ";
+            //output += waypointIndex.ToString() + ", ";
+            //output += "prev: ";
+            //foreach (int nb in allWaypoints[waypointIndex].prev) { output += nb.ToString() + ", "; }
+            //output += "other lanes: ";
+            //foreach (int nb in allWaypoints[waypointIndex].otherLanes) { output += nb.ToString() + ", "; }
+            //Debug.Log(output);
             SetTargetWaypoint(agentIndex, waypointIndex);
         }
 
@@ -54,6 +65,33 @@ namespace GleyUrbanAssets
             return (T)allWaypoints[waypointIndex];
         }
 
+        /// <summary>
+        /// Gets the target pullover waypoint of the agent
+        /// </summary>
+        /// <typeparam name="T">type of waypoint</typeparam>
+        /// <param name="agentIndex">agent index</param>
+        /// <returns></returns>
+        internal T GetPulloverWaypoint<T>(int agentIndex, Vector3 agentVelocity, Vector3 agentPosition) where T : WaypointBase
+        {
+            WaypointBase waypoint = allWaypoints[allWaypoints.Length - (target.Length + agentIndex)];
+
+            Vector3 pulloverDisplacementSlowdown = agentVelocity;
+            Vector3 laneDirection = (allWaypoints[allWaypoints[target[agentIndex]].neighbors[0]].position - allWaypoints[target[agentIndex]].position).normalized;
+            Vector3 pulloverDisplacementBase = 5 * (Quaternion.Euler(0, 45, 0) * laneDirection);
+
+            waypoint.position = agentPosition + pulloverDisplacementSlowdown + pulloverDisplacementBase;
+            waypoint.prev = new List<int>(target[agentIndex]);
+            waypoint.neighbors = new List<int>(allWaypoints[target[agentIndex]].neighbors);
+
+            target[agentIndex] = allWaypoints.Length - (target.Length + agentIndex);
+
+            Debug.Log("agentPosition: " + agentPosition.ToString() + ", agentVelocity: " + agentVelocity.ToString());
+
+            Debug.DrawRay(agentPosition, pulloverDisplacementSlowdown, Color.blue);
+            Debug.DrawRay(agentPosition + pulloverDisplacementSlowdown, pulloverDisplacementBase, Color.magenta);
+
+            return (T)waypoint;
+        }
 
         /// <summary>
         /// Gets the target waypoint of the agent

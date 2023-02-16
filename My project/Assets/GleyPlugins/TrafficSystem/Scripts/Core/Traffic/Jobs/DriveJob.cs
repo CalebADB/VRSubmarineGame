@@ -22,6 +22,7 @@ namespace GleyTrafficSystem
         public NativeArray<bool> readyToRemove;
         public NativeArray<bool> needsWaypoint;
         public NativeArray<bool> isBraking;
+        public NativeArray<bool> isSirenAknowledged;
 
         [ReadOnly] public NativeArray<SpecialDriveActionTypes> specialDriveAction;
         [ReadOnly] public NativeArray<float3> targetWaypointPosition;
@@ -100,6 +101,8 @@ namespace GleyTrafficSystem
             {
                 //Debug.Log("currentSpeed " + currentSpeed * 3.6f + " targetSpeed " + targetSpeed * 3.6f + " maxSpeedForRoadType " + maxSpeedForRoadType * 3.6f + " " + maxSpeed[index] * 3.6f);
             }
+
+            if (isSirenAknowledged[index] && waypointDistance < 1.0f) { nextFrameSpeed *= waypointDistance; }
             //compute forces required for the target speed to be achieved
             bodyForce[index] = ComputeBodyForce(index, nextFrameSpeed);
 

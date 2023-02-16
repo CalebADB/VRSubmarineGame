@@ -1,4 +1,6 @@
 ﻿using GleyUrbanAssets;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GleyTrafficSystem
@@ -11,7 +13,27 @@ namespace GleyTrafficSystem
         internal WaypointManager Initialize(Waypoint[] allWaypoints, int nrOfVehicles, bool debugWaypoints, bool debugDisabledWaypoints)
         {
             WaypointEvents.onTrafficLightChanged += TrafficLightChanged;
-            base.Initialize(allWaypoints, nrOfVehicles, debugWaypoints, debugDisabledWaypoints);
+
+
+            Waypoint[] newAllWaypoints = new Waypoint[allWaypoints.Length + nrOfVehicles];
+            for (int i = 0; i < newAllWaypoints.Length; i++)
+            {
+                if (i < allWaypoints.Length)
+                {
+                    newAllWaypoints[i] = allWaypoints[i];
+                    //Debug.Log(i.ToString() + ": " + allWaypoints[i].name);
+                }
+                else
+                {
+                    Waypoint pulloverWaypoint = new Waypoint();
+                    pulloverWaypoint.name = "debugPulloverWaypoint " + (i - allWaypoints.Length).ToString();
+                    pulloverWaypoint.listIndex = i;
+                    pulloverWaypoint.stop = false;
+                    newAllWaypoints[i] = pulloverWaypoint;
+                    //Debug.Log(i.ToString() + ": " + "New way point: " + pulloverWaypoint.name);
+                }
+            }
+            base.Initialize(newAllWaypoints, nrOfVehicles, debugWaypoints, debugDisabledWaypoints);
             return this;
         }
 

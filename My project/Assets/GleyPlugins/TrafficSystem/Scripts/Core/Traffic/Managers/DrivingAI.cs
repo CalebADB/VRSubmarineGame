@@ -378,6 +378,8 @@ namespace GleyTrafficSystem
         /// <param name="active">true -. add action to queue, false-> remove action</param>
         internal void NewDriveActionArrived(int index, SpecialDriveActionTypes newAction, bool active)
         {
+            Debug.Log("newAction: " + newAction.ToString());
+
             if (active == true)
             {
                 //if the new action is not already in the list-> add it in the required position based on priority
@@ -701,6 +703,7 @@ namespace GleyTrafficSystem
 
         void ContinueStraight(int index, VehicleTypes carType)
         {
+            Debug.Log("ContinueStraight");
             //get new waypoint on the same lane
             int freeWaypointIndex = waypointManager.GetCurrentLaneWaypointIndex(index, (int)carType);
             if (freeWaypointIndex != -1)

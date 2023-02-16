@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dee86a1dde50364fb4b2a27344026f5, type: 3}
   m_Name: DebugOptions
   m_EditorClassIdentifier: 
-  debug: 1
-  debugSpeed: 1
-  debugAI: 1
-  debugIntersections: 1
+  debug: 0
+  debugSpeed: 0
+  debugAI: 0
+  debugIntersections: 0
   debugWaypoints: 1
   debugDisabledWaypoints: 0
   stopIntersectionUpdate: 0
-  drawBodyForces: 1
-  drawRaycasts: 1
+  drawBodyForces: 0
+  drawRaycasts: 0
   debugDesnity: 0

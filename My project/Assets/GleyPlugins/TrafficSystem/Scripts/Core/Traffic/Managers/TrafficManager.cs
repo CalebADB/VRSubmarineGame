@@ -16,6 +16,13 @@ namespace GleyTrafficSystem
     public class TrafficManager : UrbanManager
     {
         #region Variables
+
+        //Caleb
+        [SerializeField]
+        bool shouldAknowledgeSiren = false;
+        [SerializeField]
+        bool shouldDisregardSiren = false;
+
         //additional components
         private TrafficVehicles trafficVehicles;
         private DensityManager densityManager;
@@ -64,6 +71,7 @@ namespace GleyTrafficSystem
         private NativeArray<int> vehicleGear;
         private NativeArray<bool> vehicleReadyToRemove;
         private NativeArray<bool> vehicleIsBraking;
+        private NativeArray<bool> vehicleIsSirenAknowledged;
         private NativeArray<bool> vehicleNeedWaypoint;
         private NativeArray<bool> ignoreVehicle;
 
@@ -248,6 +256,7 @@ namespace GleyTrafficSystem
             vehicleReadyToRemove = new NativeArray<bool>(nrOfVehicles, Allocator.Persistent);
             vehicleNeedWaypoint = new NativeArray<bool>(nrOfVehicles, Allocator.Persistent);
             vehicleIsBraking = new NativeArray<bool>(nrOfVehicles, Allocator.Persistent);
+            vehicleIsSirenAknowledged = new NativeArray<bool>(nrOfVehicles, Allocator.Persistent);
             ignoreVehicle = new NativeArray<bool>(nrOfVehicles, Allocator.Persistent);
             vehicleGear = new NativeArray<int>(nrOfVehicles, Allocator.Persistent);
             vehicleRigidbody = new Rigidbody[nrOfVehicles];
@@ -736,6 +745,7 @@ namespace GleyTrafficSystem
                 distanceBetweenVehicles = distanceBetweenVehicles,
                 wheelSign = wheelSign,
                 isBraking = vehicleIsBraking,
+                isSirenAknowledged = vehicleIsSirenAknowledged,
                 drag = vehicleDrag,
                 maxSpeed = vehicleMaxSpeed,
                 gear = vehicleGear,
@@ -759,8 +769,30 @@ namespace GleyTrafficSystem
             vehicleBodyForce = driveJob.bodyForce;
             vehicleActionValue = driveJob.actionValue;
             vehicleIsBraking = driveJob.isBraking;
+            vehicleIsSirenAknowledged = driveJob.isSirenAknowledged;
             vehicleGear = driveJob.gear;
 
+            if (shouldAknowledgeSiren)
+            {
+                Debug.Log("pullover");
+                for (int i = 0; i < nrOfVehicles; i++)
+                {
+                    vehicleIsSirenAknowledged[i] = true;
+                    waypointManager.GetPulloverWaypoint<Waypoint>(i, vehicleRigidbody[i].velocity, vehicleRigidbody[i].position);
+                }
+
+                shouldAknowledgeSiren = false;
+            }
+            if (shouldDisregardSiren)
+            {
+                Debug.Log("resume");
+                for (int i = 0; i < nrOfVehicles; i++)
+                {
+                    vehicleIsSirenAknowledged[i] = false;
+                }
+
+                shouldDisregardSiren = false;
+            }
 
             //make vehicle actions based on job results
             for (int i = 0; i < nrOfVehicles; i++)
@@ -790,12 +822,10 @@ namespace GleyTrafficSystem
                         vehicleRigidbody[i].AddForce(vehicleBodyForce[i] * ((float)groundedWheels / (vehicleEndWheelIndex[i] - vehicleStartWheelIndex[i])), ForceMode.VelocityChange);
                         vehicleRigidbody[i].MoveRotation(vehicleRigidbody[i].rotation * Quaternion.Euler(0, vehicleRotationAngle[i], 0));
                     }
-                    //request new waypoint if needed
-                    if (vehicleNeedWaypoint[i] == true)
-                    {
-                        drivingAI.WaypointRequested(i, vehicleType[i]);
-                    }
 
+                    //request new waypoint if needed
+                    if ((!vehicleIsSirenAknowledged[i]) && (vehicleNeedWaypoint[i] == true)) drivingAI.WaypointRequested(i, vehicleType[i]);
+                    //if ((vehicleNeedWaypoint[i] == true)) drivingAI.WaypointRequested(i, vehicleType[i]);
 
                     //adapt speed to the front vehicle
                     if (vehicleSpecialDriveAction[i] == SpecialDriveActionTypes.Overtake || vehicleSpecialDriveAction[i] == SpecialDriveActionTypes.Follow)
@@ -1011,6 +1041,7 @@ namespace GleyTrafficSystem
             distanceBetweenVehicles.Dispose();
             wheelSign.Dispose();
             vehicleIsBraking.Dispose();
+            vehicleIsSirenAknowledged.Dispose();
             ignoreVehicle.Dispose();
             activeCameraPositions.Dispose();
 
